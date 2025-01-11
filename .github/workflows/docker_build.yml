@@ -1,0 +1,31 @@
+name: Build (and Push if release) Docker Image to Docker Hub
+
+on: push
+jobs:
+  build-docker-image:
+    name: push docker image to hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: check repository
+        uses: actions/checkout@v4
+
+      - name: login to docker registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+
+  release-docker-image:
+    name: Push built Docker Image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: build-docker-image
+    if: github.ref == 'refs/heads/main'
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+"
+    steps:
+      - name: build and push docker image to registry
+        uses: docker/build-push-action@v5
+        with:
+          context: DockerFileFolder/
+          push: true
+          tags: toastedcrumpets/freecad-action:${{  github.ref_name }}
