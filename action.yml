@@ -1,0 +1,24 @@
+name: "Run FreeCAD operations on a FCStd file"
+description: "Export STL/3MF files and more from a FreeCAD file"
+inputs:
+  files:
+    description: "Path to the FreeCAD file"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    #- name: Install Dependencies
+    #  run: pip install -r requirements.txt
+    #  shell: bash
+    #- name: Pass Inputs to Shell
+    #  run: |
+    #    echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+    #  shell: bash
+    #- name: Fetch the number's square
+    #  id: get-square
+    #  run: python src/get_num_square.py
+    #  shell: bash
