@@ -7,7 +7,8 @@ jobs:
   build-docker-image:
     strategy:
       matrix:
-        freecad_tag: [1.0.0, 0.21.2, 0.20.2]
+        freecad_tag: [1.0.0, 0.21.2]
+      fail-fast: false
     name: push docker image to hub
     runs-on: ubuntu-latest
     steps:
