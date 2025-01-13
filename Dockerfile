@@ -1,4 +1,6 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
+# We need ubuntu:22.04 because FreeCAD 0.21 can only compile against python 3.12
+# https://github.com/FreeCAD/FreeCAD/pull/12286
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV FREECAD_REPO=https://github.com/FreeCAD/FreeCAD
